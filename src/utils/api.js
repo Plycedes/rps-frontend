@@ -45,3 +45,13 @@ export const getPreviousTournaments = async () => {
     const res = await API.get("/tournaments/get-previous");
     return res.data;
 };
+
+export const getLeaderboard = async (tournamentId) => {
+    const res = await API.get(`/tournaments/get-leaderboard/${tournamentId}`);
+    return res.data;
+};
+
+export const getTournament = async (tournamentId) => {
+    const res = await API.get(`/tournaments/get/${tournamentId}`);
+    return res.data;
+};
