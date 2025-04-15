@@ -4,8 +4,8 @@ import { useAxios } from "../hooks/useAxios";
 import { registerUser } from "../utils/api";
 
 const SignUp = () => {
-    const [form, setForm] = useState({ name: "", email: "", password: "" });
-    const { loading, error, request } = useAxios();
+    const [form, setForm] = useState({ username: "", email: "", password: "" });
+    const { loading, error, fetchData } = useAxios();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -14,21 +14,27 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await request(() => registerUser(form));
+        const res = await fetchData(() => registerUser(form));
         if (res?.statusCode === 200) {
-            navigate("/sign-in");
+            navigate("/");
         }
     };
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white px-4">
-            <h1 className="text-3xl font-bold mb-6">Sign Up</h1>
+            <div className="flex gap-2 items-center mb-4">
+                <img
+                    src="https://res.cloudinary.com/dxsffcg6l/image/upload/v1744696002/Avid-Logo_hgdvr3.png"
+                    className="w-12 h-12"
+                />
+                <h1 className="text-3xl font-bold mb-2">Sign Up</h1>
+            </div>
 
             <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
                 <input
-                    name="name"
-                    placeholder="Name"
-                    value={form.name}
+                    name="username"
+                    placeholder="Username"
+                    value={form.username}
                     onChange={handleChange}
                     className="w-full p-3 bg-gray-800 text-white rounded border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     required
