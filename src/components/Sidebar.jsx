@@ -48,7 +48,7 @@ function Sidebar() {
                                 <NavLink to="">
                                     <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
                                         <img
-                                            src="https://img.icons8.com/?size=100&id=GFDbOB2OqPWt&format=png&color=7726e6"
+                                            src="https://img.icons8.com/?size=100&id=GFDbOB2OqPWt&format=png&color=ad46ff"
                                             className="w-7 h-7"
                                         />
                                         Play
@@ -59,7 +59,7 @@ function Sidebar() {
                                 <NavLink to="tournaments">
                                     <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
                                         <img
-                                            src="https://img.icons8.com/?size=100&id=NuFBBv7mvFEA&format=png&color=7726e6"
+                                            src="https://img.icons8.com/?size=100&id=NuFBBv7mvFEA&format=png&color=ad46ff"
                                             className="w-7 h-7"
                                         />
                                         Tournaments
@@ -70,7 +70,7 @@ function Sidebar() {
                                 <NavLink to="profile">
                                     <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
                                         <img
-                                            src="https://img.icons8.com/?size=100&id=Ib9FADThtmSf&format=png&color=7726e6"
+                                            src="https://img.icons8.com/?size=100&id=Ib9FADThtmSf&format=png&color=ad46ff"
                                             className="w-7 h-7"
                                         />
                                         Profile
@@ -81,7 +81,7 @@ function Sidebar() {
                                 <NavLink to="leaderboard">
                                     <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
                                         <img
-                                            src="https://img.icons8.com/?size=100&id=70624&format=png&color=7726e6"
+                                            src="https://img.icons8.com/?size=100&id=70624&format=png&color=ad46ff"
                                             className="w-7 h-7"
                                         />
                                         Leaderboard
@@ -92,7 +92,7 @@ function Sidebar() {
                                 <NavLink to="marketplace">
                                     <div className="flex gap-2 items-center block pt-3 py-2 px-4 hover:bg-gray-700 rounded">
                                         <img
-                                            src="https://img.icons8.com/?size=100&id=78230&format=png&color=7726e6"
+                                            src="https://img.icons8.com/?size=100&id=78230&format=png&color=ad46ff"
                                             className="w-7 h-7"
                                         />
                                         Marketplace
@@ -103,7 +103,7 @@ function Sidebar() {
                                 <NavLink to="contact-us">
                                     <div className="flex gap-2 items-center block pt-3 py-2 px-4 hover:bg-gray-700 rounded">
                                         <img
-                                            src="https://img.icons8.com/?size=100&id=2848&format=png&color=7726e6"
+                                            src="https://img.icons8.com/?size=100&id=2848&format=png&color=ad46ff"
                                             className="w-7 h-7"
                                         />
                                         Contact Us

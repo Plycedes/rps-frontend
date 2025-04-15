@@ -3,3 +3,5 @@
 @theme {
     --color-primary: #7726e6;
 }
+
+@plugin 'tailwind-scrollbar';

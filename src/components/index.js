@@ -6,5 +6,6 @@ import Sidebar from "./Sidebar";
 import Tournaments from "./Tournaments";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import Loader from "./Loader";
 
-export { Game, Leaderboard, Marketplace, Profile, Sidebar, Tournaments, SignIn, SignUp };
+export { Game, Leaderboard, Marketplace, Profile, Sidebar, Tournaments, SignIn, SignUp, Loader };
