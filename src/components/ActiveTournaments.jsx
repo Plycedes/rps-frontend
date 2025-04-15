@@ -1,6 +1,7 @@
 import { useAxios } from "../hooks/useAxios.js";
 import { useEffect, useState } from "react";
 import { getActiveTournaments } from "../utils/api";
+import { useParams, Link } from "react-router-dom";
 import Loader from "./Loader";
 
 const ActiveTournaments = () => {

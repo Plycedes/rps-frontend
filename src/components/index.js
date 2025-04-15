@@ -7,6 +7,7 @@ import Tournaments from "./Tournaments";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Loader from "./Loader";
+import Tournament from "./Tournament";
 import ActiveTournaments from "./ActiveTournaments";
 import TournamentsHistory from "./TournamentHistory";
 
@@ -20,6 +21,7 @@ export {
     SignIn,
     SignUp,
     Loader,
+    Tournament,
     ActiveTournaments,
     TournamentsHistory,
 };

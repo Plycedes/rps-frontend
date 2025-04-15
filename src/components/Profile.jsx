@@ -26,7 +26,7 @@ function Profile() {
                     <div className="h-screen flex flex-col">
                         <div className="flex h-3/5">
                             <div className="w-1/2 flex">
-                                <div className="w-full m-2 p-3 border rounded-lg shadow bg-gray-800 border border-purple-500">
+                                <div className="w-full m-2 p-3 border rounded-lg shadow bg-zinc-900 border border-purple-500">
                                     <div className="h-full">
                                         <div className="">
                                             <h1 className="text-2xl font-semibold text-purple-500">
@@ -34,7 +34,7 @@ function Profile() {
                                             </h1>
                                         </div>
                                         <div>
-                                            <div className="flex justify-between items-center m-2 mt-3 bg-gray-700 p-3 rounded-lg">
+                                            <div className="flex justify-between items-center m-2 mt-3 bg-gray-800 p-3 rounded-lg">
                                                 <div className="flex gap-3 items-center">
                                                     <img
                                                         src={userData.avatar}
@@ -63,7 +63,7 @@ function Profile() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="mx-2 mt-3 bg-gray-700 p-3 rounded-lg">
+                                        <div className="mx-2 mt-3 bg-gray-800 p-3 rounded-lg">
                                             <h1 className="text-purple-300 text-xl font-semibold">
                                                 Account Stats:
                                             </h1>
@@ -151,7 +151,7 @@ function Profile() {
                             </div>
 
                             <div className="w-1/2 flex">
-                                <div className="w-full m-2 p-3 border rounded-lg shadow bg-gray-800 border border-purple-500">
+                                <div className="w-full m-2 p-3 border rounded-lg shadow bg-zinc-900 border border-purple-500">
                                     <div className="flex justify-center text-2xl text-purple-500 font-semibold">
                                         Signed Petitions
                                     </div>
@@ -196,7 +196,7 @@ function Profile() {
                         </div>
 
                         <div className="flex h-2/5 mb-4">
-                            <div className="w-full h-full m-2 p-2 pb-10 border rounded-lg shadow bg-gray-800 border border-purple-500">
+                            <div className="w-full h-full m-2 p-2 pb-10 border rounded-lg shadow bg-zinc-900 border border-purple-500">
                                 <div className="text-2xl mb-2 ml-2 text-purple-500 font-semibold">
                                     Deployed Petitions:
                                 </div>
