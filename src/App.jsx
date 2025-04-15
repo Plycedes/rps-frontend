@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import { Sidebar } from "./components";
 
 function App() {
-    const [count, setCount] = useState(0);
-
     return (
-        <>
-            <h1 className="text-5xl">Hello</h1>
-        </>
+        <div className="flex">
+            <div className="w-1/6">
+                <Sidebar />
+            </div>
+            <div className="w-5/6 h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-purple-800 scrollbar-track-transparent">
+                <Outlet />
+            </div>
+        </div>
     );
 }
 
