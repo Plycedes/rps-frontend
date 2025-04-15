@@ -35,3 +35,13 @@ export const getCurrentUser = async () => {
     const res = await API.get("/users/current-user");
     return res.data;
 };
+
+export const getActiveTournaments = async () => {
+    const res = await API.get("/tournaments/get-active");
+    return res.data;
+};
+
+export const getPreviousTournaments = async () => {
+    const res = await API.get("/tournaments/get-previous");
+    return res.data;
+};

@@ -7,5 +7,7 @@ import Tournaments from "./Tournaments";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Loader from "./Loader";
+import ActiveTournaments from "./ActiveTournaments";
+import TournamentsHistory from "./TournamentHistory";
 
 export { Game, Leaderboard, Marketplace, Profile, Sidebar, Tournaments, SignIn, SignUp, Loader };
