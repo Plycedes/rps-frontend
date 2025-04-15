@@ -7,19 +7,46 @@ import {
     RouterProvider,
     Route,
 } from "react-router-dom";
-import { Game, Leaderboard, Marketplace, Profile, Tournaments } from "./components";
+import { Game, Leaderboard, Marketplace, Profile, Tournaments, SignIn, SignUp } from "./components";
 import { store } from "./redux/store.js";
 import { Provider } from "react-redux";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import GuestRoute from "./routes/GuestRoute.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<App />}>
-            <Route path="" element={<Game />} />
-            <Route path="/tournaments" element={<Tournaments />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="marketplace" element={<Marketplace />} />
-        </Route>
+        <>
+            <Route
+                path="/signin"
+                element={
+                    <GuestRoute>
+                        <SignIn />
+                    </GuestRoute>
+                }
+            />
+            <Route
+                path="/signup"
+                element={
+                    <GuestRoute>
+                        <SignUp />
+                    </GuestRoute>
+                }
+            />
+            <Route
+                path="/"
+                element={
+                    <ProtectedRoute>
+                        <App />
+                    </ProtectedRoute>
+                }
+            >
+                <Route path="" element={<Game />} />
+                <Route path="/tournaments" element={<Tournaments />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/marketplace" element={<Marketplace />} />
+            </Route>
+        </>
     )
 );
 
