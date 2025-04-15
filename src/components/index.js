@@ -10,4 +10,16 @@ import Loader from "./Loader";
 import ActiveTournaments from "./ActiveTournaments";
 import TournamentsHistory from "./TournamentHistory";
 
-export { Game, Leaderboard, Marketplace, Profile, Sidebar, Tournaments, SignIn, SignUp, Loader };
+export {
+    Game,
+    Leaderboard,
+    Marketplace,
+    Profile,
+    Sidebar,
+    Tournaments,
+    SignIn,
+    SignUp,
+    Loader,
+    ActiveTournaments,
+    TournamentsHistory,
+};
