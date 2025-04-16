@@ -16,6 +16,7 @@ import {
     SignIn,
     SignUp,
     Tournament,
+    ContactUs,
 } from "./components";
 import { store } from "./redux/store.js";
 import { Provider } from "react-redux";
@@ -56,6 +57,7 @@ const router = createBrowserRouter(
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/marketplace" element={<Marketplace />} />
+                <Route path="/contact-us" element={<ContactUs />} />
             </Route>
         </>
     )
