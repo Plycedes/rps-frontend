@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const DialogBox = ({ visible, onClose, onConfirm, nftId, type }) => {
+const DialogBox = ({ visible, onClose, onConfirm, nftId, type, name }) => {
     const [price, setPrice] = useState("");
 
     const handleConfirm = () => {
@@ -19,7 +19,7 @@ const DialogBox = ({ visible, onClose, onConfirm, nftId, type }) => {
         <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center">
             <div className="bg-gray-900 border border-purple-500 rounded-lg p-6 w-96 text-white shadow-2xl">
                 <h2 className="text-xl font-bold mb-4 capitalize">
-                    {type} NFT: {nftId.slice(0, 6)}...
+                    {type} NFT: {name}
                 </h2>
 
                 {type === "list" ? (
