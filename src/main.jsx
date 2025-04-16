@@ -8,7 +8,7 @@ import {
     Route,
 } from "react-router-dom";
 import {
-    Game,
+    TournamentSelection,
     Leaderboard,
     Marketplace,
     Profile,
@@ -17,9 +17,10 @@ import {
     SignUp,
     Tournament,
     ContactUs,
+    GamePlay,
 } from "./components";
 import { store } from "./redux/store.js";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import GuestRoute from "./routes/GuestRoute.jsx";
 import { SocketProvider } from "./context/SocketContext.jsx";
@@ -51,7 +52,8 @@ const router = createBrowserRouter(
                     </ProtectedRoute>
                 }
             >
-                <Route path="" element={<Game />} />
+                <Route path="" element={<TournamentSelection />} />
+                <Route path="/game/:matchId" element={<GamePlay />} />
                 <Route path="/tournaments" element={<Tournaments />} />
                 <Route path="/tournament/:id" element={<Tournament />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
