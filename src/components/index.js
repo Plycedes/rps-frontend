@@ -1,6 +1,6 @@
 import Game from "./Game";
 import Leaderboard from "./Leaderboard";
-import Marketplace from "./Marketplace";
+import Marketplace from "./marketplace/Marketplace";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
 import Tournaments from "./Tournaments";

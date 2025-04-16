@@ -65,3 +65,28 @@ export const getMatchesLeaderboard = async () => {
     const res = await API.get("/matches/leaderboard");
     return res.data;
 };
+
+export const getListedNFTs = async () => {
+    const res = await API.get("/nfts/nft-for-sale");
+    return res.data;
+};
+
+export const getUserNFTs = async () => {
+    const res = await API.get("/nfts/user-nft");
+    return res.data;
+};
+
+export const listNFT = async (data) => {
+    const res = await API.post("/nfts/list", data);
+    return res.data;
+};
+
+export const unListNFT = async (data) => {
+    const res = await API.post("/nfts/unlist", data);
+    return res.data;
+};
+
+export const buytNFT = async (data) => {
+    const res = await API.post("/nfts/buy", data);
+    return res.data;
+};

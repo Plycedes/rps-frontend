@@ -8,7 +8,7 @@ function Tournaments() {
             <div className="rounded-lg shadow bg-gray-800 border border-purple-500 h-full">
                 <div className="flex flex-col h-full bg-zinc-900 text-white rounded-lg shadow-inner">
                     {/* Mini Navbar */}
-                    <div className="flex justify-start h-15 border-b border-gray-700 bg-gray-800 rounded-t-lg">
+                    <div className="flex justify-start h-15 border-b border-gray-700 bg-zinc-900 rounded-t-lg">
                         <div className="w-1/2 flex h-full justify-center">
                             <button
                                 onClick={() => setSelected("active")}
