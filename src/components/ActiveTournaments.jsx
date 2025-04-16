@@ -24,14 +24,16 @@ const ActiveTournaments = () => {
                 <Link
                     key={t._id}
                     to={`/tournament/${t._id}`}
-                    className="bg-zinc-800 p-4 rounded shadow-md flex justify-between"
+                    className="bg-gray-800 p-4 rounded shadow-md flex justify-between"
                 >
                     <div>
                         <h2 className="text-xl font-semibold text-purple-400">{t.name}</h2>
-                        <p className="text-sm text-zinc-400">Status: {t.status}</p>
-                        <p className="text-sm text-zinc-400">
-                            Participants: {t.participantsCount || "N/A"}
-                        </p>
+                        <div className="flex gap-5">
+                            <p className="text-sm text-zinc-400">Status: {t.status}</p>
+                            <p className="text-sm text-zinc-400">
+                                Participants: {t.participantsCount || "N/A"}
+                            </p>
+                        </div>
                     </div>
                     <p className="text-sm text-zinc-400">
                         Ends on: {new Date(t.endDate).toLocaleString()}

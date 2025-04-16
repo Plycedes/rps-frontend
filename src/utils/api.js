@@ -55,3 +55,8 @@ export const getTournament = async (tournamentId) => {
     const res = await API.get(`/tournaments/get/${tournamentId}`);
     return res.data;
 };
+
+export const joinTournament = async (data) => {
+    const res = await API.post("/tournaments/join", data);
+    return res.data;
+};
