@@ -60,3 +60,8 @@ export const joinTournament = async (data) => {
     const res = await API.post("/tournaments/join", data);
     return res.data;
 };
+
+export const getMatchesLeaderboard = async () => {
+    const res = await API.get("/matches/leaderboard");
+    return res.data;
+};
