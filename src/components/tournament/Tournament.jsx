@@ -55,7 +55,7 @@ function Tournament() {
                     {/* Tournament Info */}
                     <div className="bg-gray-800 rounded-lg p-4 shadow border border-purple-500">
                         <div className="flex justify-between">
-                            <h2 className="text-4xl font-bold text-purple-400 mb-4">
+                            <h2 className="text-4xl font-bold text-purple-500 mb-4">
                                 {tournament.name}
                             </h2>
                             {hasParticipated ? (
