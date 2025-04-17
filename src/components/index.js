@@ -3,15 +3,15 @@ import Leaderboard from "./Leaderboard";
 import Marketplace from "./marketplace/Marketplace";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
-import Tournaments from "./Tournaments";
+import Tournaments from "./tournament/Tournaments";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Loader from "./Loader";
-import Tournament from "./Tournament";
+import Tournament from "./tournament/Tournament";
 import ContactUs from "./ContactUs";
 import GamePlay from "./gameplay/GamePlay";
-import ActiveTournaments from "./ActiveTournaments";
-import TournamentsHistory from "./TournamentHistory";
+import ActiveTournaments from "./tournament/ActiveTournaments";
+import TournamentsHistory from "./tournament/TournamentHistory";
 import TournamentSelection from "./gameplay/TournamentSelection";
 
 export {

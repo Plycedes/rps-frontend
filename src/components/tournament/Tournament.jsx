@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useAxios } from "../hooks/useAxios";
-import Loader from "./Loader";
-import Countdown from "./Countdown";
-import { getTournament, getLeaderboard, joinTournament } from "../utils/api";
+import { useAxios } from "../../hooks/useAxios";
+import Loader from "../Loader";
+import Countdown from "../Countdown";
+import { getTournament, getLeaderboard, joinTournament } from "../../utils/api";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ActiveTournaments, TournamentsHistory } from "../components";
+import { ActiveTournaments, TournamentsHistory } from "..";
 
 function Tournaments() {
     const [selected, setSelected] = useState("active");
