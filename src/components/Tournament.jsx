@@ -162,11 +162,11 @@ function Tournament() {
                     <div>
                         <div className="border border-purple-500 p-4 bg-gray-800 rounded-lg flex gap-3 ">
                             {tournament.winner.username ? (
-                                <div>
+                                <div className="flex gap-4">
                                     <img
                                         src={tournament.winner.avatar}
                                         alt={tournament.reward.name}
-                                        className="w-34 h-34 object-cover rounded-lg border border-purple-500"
+                                        className="w-31 h-31 object-cover rounded-lg border border-purple-500"
                                     />
                                     <div className="w-full h-full flex flex-col justify-start">
                                         <h3 className="text-2xl text-purple-400 font-semibold">
