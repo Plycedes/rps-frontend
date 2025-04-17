@@ -8,9 +8,7 @@ export const SocketProvider = ({ children }) => {
     const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
-        const socket = io("http://localhost:8000", {
-            autoConnect: false,
-        });
+        const socket = io("http://localhost:8000");
 
         socketRef.current = socket;
 

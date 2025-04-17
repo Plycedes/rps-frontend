@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useSocket } from "../../context/SocketContext";
 import { useAxios } from "../../hooks/useAxios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { getUserParticipatedTournaments } from "../../utils/api";
 
-const TournamentSelection = ({ userId }) => {
+const TournamentSelection = () => {
+    const userId = useSelector((state) => state.auth.user?._id);
     const { loading, error, fetchData } = useAxios();
 
     const [tournaments, setTournaments] = useState([]);
@@ -67,9 +69,9 @@ const TournamentSelection = ({ userId }) => {
                         onClick={() => handleJoinTournament(t._id)}
                         className="cursor-pointer bg-gray-800 hover:bg-purple-800 transition-all duration-200 p-6 rounded-2xl border-2 border-purple-600"
                     >
-                        <h2 className="text-xl font-semibold text-purple-300">{t.name}</h2>
+                        <h2 className="text-2xl font-semibold text-purple-400 mb-1">{t.name}</h2>
                         <p className="text-sm text-gray-400">
-                            Starts: {new Date(t.c).toLocaleDateString()}
+                            Ends On: {new Date(t.endDate).toLocaleDateString()}
                         </p>
                     </div>
                 ))}

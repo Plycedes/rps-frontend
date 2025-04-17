@@ -26,42 +26,65 @@ const GamePlay = () => {
     const [opponentChoice, setOpponentChoice] = useState(null);
     const [result, setResult] = useState(null);
     const [waiting, setWaiting] = useState(false);
+    const [round, setRound] = useState(1);
+    const [scores, setScores] = useState({});
+    const [finalWinner, setFinalWinner] = useState(null);
 
     useEffect(() => {
         if (!socket) return;
 
-        socket.emit("joinMatchRoom", { matchId });
+        socket.emit("joinMatchRoom", { matchId }); // Correct event name
 
-        socket.on("roundResult", ({ winnerId, playerChoice, opponentChoice }) => {
+        socket.on("roundResult", ({ winnerId, playerChoice, opponentChoice, scores }) => {
+            // Correct event name
             setSelected(playerChoice);
             setOpponentChoice(opponentChoice);
             setWaiting(false);
+            setScores(scores);
 
             if (winnerId === "draw") {
                 setResult("It's a draw!");
             } else if (winnerId === userId) {
-                setResult("You win! 🎉");
+                setResult("You win this round! 🎉");
             } else {
-                setResult("You lose 😢");
+                setResult("You lose this round 😢");
+            }
+
+            setRound((prev) => prev + 1);
+        });
+
+        socket.on("finalResult", ({ winnerId, scores }) => {
+            // Correct event name
+            setScores(scores);
+            setWaiting(false);
+
+            if (winnerId === "draw") {
+                setFinalWinner("It's a draw overall!");
+            } else if (winnerId === userId) {
+                setFinalWinner("You won the game! 🏆");
+            } else {
+                setFinalWinner("You lost the game 😞");
             }
         });
 
-        socket.on("waitingForOpponentChoice", () => {
+        socket.on("waitingForOpponent", () => {
+            // Correct event name
             setWaiting(true);
             setResult(null);
         });
 
         return () => {
             socket.off("roundResult");
-            socket.off("waitingForOpponentChoice");
+            socket.off("finalResult");
+            socket.off("waitingForOpponent");
         };
     }, [socket, matchId, userId]);
 
-    const handleChoice = (choice) => {
-        setSelected(choice);
+    const handleChoice = (move) => {
+        setSelected(move);
         setResult(null);
         setWaiting(true);
-        socket.emit("playerChoice", { matchId, userId, choice });
+        socket.emit("makeMove", { matchId, userId, move });
     };
 
     return (
@@ -101,6 +124,27 @@ const GamePlay = () => {
                     </div>
                 )}
             </div>
+
+            <div className="mt-4 text-center text-sm text-gray-300">
+                <p>Round: {round > 3 ? 3 : round}/3</p>
+                <p>Your Score: {scores[userId] || 0}</p>
+                <p>
+                    Opponent Score: {Object.entries(scores).find(([id]) => id !== userId)?.[1] || 0}
+                </p>
+            </div>
+
+            {finalWinner && (
+                <div className="mt-6 text-2xl font-bold text-yellow-400">{finalWinner}</div>
+            )}
+
+            {finalWinner && (
+                <button
+                    onClick={() => (window.location.href = "/tournaments")}
+                    className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+                >
+                    Back to Tournaments
+                </button>
+            )}
         </div>
     );
 };
