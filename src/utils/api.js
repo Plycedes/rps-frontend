@@ -95,3 +95,14 @@ export const getUserParticipatedTournaments = async () => {
     const res = await API.get("/tournaments/get-user");
     return res.data;
 };
+
+export const getUserMatches = async () => {
+    const res = await API.get("/matches/user-matches");
+    return res.data;
+};
+
+export const changePFP = async (data) => {
+    console.log(data);
+    const res = await API.post("/users/update-avatar", data);
+    return res.data;
+};

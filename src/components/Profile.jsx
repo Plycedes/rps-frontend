@@ -1,26 +1,61 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { getCurrentUser } from "../utils/api.js";
-import { Loader } from "../components";
+import React, { useEffect, useState, useRef } from "react";
+import { getCurrentUser, getUserNFTs, getUserMatches, changePFP } from "../utils/api.js";
+import { Loader, NFT } from "../components";
 import { useAxios } from "../hooks/useAxios";
+import { ToastContainer, toast } from "react-toastify";
 
 function Profile() {
     const [userData, setUserData] = useState({});
+    const [userNFT, setUserNFT] = useState({});
+    const [userMatches, setUserMatches] = useState({});
     const { loading, error, fetchData } = useAxios();
+
+    const fileInputRef = useRef();
 
     useEffect(() => {
         (async () => {
-            const res = await fetchData(() => getCurrentUser());
-            if (res.statusCode === 200) {
-                console.log(res.data);
-                setUserData(res.data);
-            }
+            const userRes = await fetchData(() => getCurrentUser());
+            const nftRes = await fetchData(() => getUserNFTs());
+            const matchRes = await fetchData(() => getUserMatches());
+
+            setUserData(userRes.data);
+            setUserNFT(nftRes.data);
+            setUserMatches(matchRes.data);
         })();
     }, []);
+
+    const handleImageClick = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.value = null;
+            fileInputRef.current.click();
+        }
+    };
+
+    const changeAvatar = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append("avatar", file);
+
+        try {
+            const res = await fetchData(() => changePFP(formData));
+            toast(res.message, {
+                autoClose: 3000,
+                theme: "dark",
+            });
+        } catch (error) {
+            toast(error, {
+                autoClose: 3000,
+                theme: "dark",
+            });
+        }
+    };
 
     return (
         <div>
             {loading && <Loader text="Loading User Profile" />}
+            <ToastContainer />
             <div>
                 <div>
                     <div className="h-screen flex flex-col">
@@ -36,10 +71,28 @@ function Profile() {
                                         <div>
                                             <div className="flex justify-between items-center m-2 mt-3 bg-gray-800 p-3 rounded-lg">
                                                 <div className="flex gap-3 items-center">
-                                                    <img
-                                                        src={userData.avatar}
-                                                        className="w-20 h-20 rounded-lg"
-                                                    />
+                                                    <div
+                                                        className="relative w-25 h-25 cursor-pointer group"
+                                                        onClick={handleImageClick}
+                                                    >
+                                                        <img
+                                                            src={userData.avatar}
+                                                            alt="Editable"
+                                                            className="w-25 h-25 object-cover rounded-lg transition duration-300 group-hover:brightness-40"
+                                                        />
+                                                        <img
+                                                            src="https://img.icons8.com/?size=100&id=H5dKJanZkZNk&format=png&color=FFFFFF"
+                                                            alt="Edit Icon"
+                                                            className="absolute inset-0 w-12 h-12 m-auto opacity-0 group-hover:opacity-100 transition duration-300"
+                                                        />
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            ref={fileInputRef}
+                                                            className="hidden"
+                                                            onChange={changeAvatar}
+                                                        />
+                                                    </div>
                                                     <div className="flex flex-col">
                                                         <div className="flex text-md text-purple-200 gap-1">
                                                             <p className="text-purple-400">
@@ -153,35 +206,39 @@ function Profile() {
                             <div className="w-1/2 flex">
                                 <div className="w-full m-2 p-3 border rounded-lg shadow bg-zinc-900 border border-purple-500">
                                     <div className="flex justify-center text-2xl text-purple-500 font-semibold">
-                                        Signed Petitions
+                                        Match History
                                     </div>
                                     <div className="flex h-full my-2 pb-10">
                                         <div className="w-full h-full rounded-lg overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-purple-800 scrollbar-track-transparent">
-                                            {false ? (
+                                            {userMatches.length > 0 ? (
                                                 <div>
                                                     <table className="table-fixed w-full">
-                                                        {votedPetitons.map((petition, index) => (
-                                                            <tr
-                                                                key={petition.pId}
-                                                                className="flex text-white my-1"
-                                                            >
-                                                                <td className="w-1/12 text-xl">
-                                                                    {index + 1}.
-                                                                </td>
+                                                        <tbody>
+                                                            {userMatches.map((match) => (
+                                                                <tr
+                                                                    key={match._id}
+                                                                    className="flex text-white my-1"
+                                                                >
+                                                                    <td className="w-3/5 text-lg text-purple-300 ml-1">
+                                                                        <div className="overflow-hidden text-ellipsis whitespace-nowrap">
+                                                                            {match.tournament}
+                                                                        </div>
+                                                                    </td>
 
-                                                                <td className="w-5/12 text-xl text-purple-300 ml-1">
-                                                                    <div className="overflow-hidden text-ellipsis whitespace-nowrap">
-                                                                        {petition.title}
-                                                                    </div>
-                                                                </td>
+                                                                    <td className="w-1/5 text-lg ml-5 text-gray-300">
+                                                                        <div className="overflow-hidden text-ellipsis whitespace-nowrap">
+                                                                            {match.opponent}
+                                                                        </div>
+                                                                    </td>
 
-                                                                <td className="w-6/12 text-xl ml-5 text-gray-300">
-                                                                    <div className="overflow-hidden text-ellipsis whitespace-nowrap">
-                                                                        {petition.description}
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        ))}
+                                                                    <td className="w-1/5 text-lg ml-5 text-gray-300">
+                                                                        <div className="overflow-hidden text-ellipsis whitespace-nowrap">
+                                                                            {match.outcome}
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             ) : (
@@ -198,14 +255,14 @@ function Profile() {
                         <div className="flex h-2/5 mb-4">
                             <div className="w-full h-full m-2 p-2 pb-10 border rounded-lg shadow bg-zinc-900 border border-purple-500">
                                 <div className="text-2xl mb-2 ml-2 text-purple-500 font-semibold">
-                                    Deployed Petitions:
+                                    Owned NFTs:
                                 </div>
                                 <div className="flex ml-2 w-full h-full overflow-x-scroll scrollbar-thin scrollbar-thumb-purple-800 scrollbar-track-transparent">
-                                    {false ? (
+                                    {userNFT.length > 0 ? (
                                         <div className="flex flex-row space-x-4">
-                                            {petitions.map((petition) => (
-                                                <div key={petition.pId} className="flex-shrink-0">
-                                                    <MiniCard petition={petition} />
+                                            {userNFT.map((nft) => (
+                                                <div key={nft._id} className="flex-shrink-0">
+                                                    <NFT nft={nft} />
                                                 </div>
                                             ))}
                                         </div>

@@ -1,4 +1,3 @@
-import Game from "./Game";
 import Leaderboard from "./Leaderboard";
 import Marketplace from "./marketplace/Marketplace";
 import Profile from "./Profile";
@@ -7,6 +6,7 @@ import Tournaments from "./tournament/Tournaments";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Loader from "./Loader";
+import NFT from "./NFT";
 import Tournament from "./tournament/Tournament";
 import ContactUs from "./ContactUs";
 import GamePlay from "./gameplay/GamePlay";
@@ -15,7 +15,7 @@ import TournamentsHistory from "./tournament/TournamentHistory";
 import TournamentSelection from "./gameplay/TournamentSelection";
 
 export {
-    Game,
+    NFT,
     Leaderboard,
     Marketplace,
     Profile,

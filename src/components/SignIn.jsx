@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAxios } from "../hooks/useAxios";
 import { loginUser } from "../utils/api.js";
 import { useDispatch } from "react-redux";
-import { setUser } from "../redux/authSlice";
+import { setUser, setToken } from "../redux/authSlice";
 
 const SignIn = () => {
     const [form, setForm] = useState({ email: "", password: "" });
@@ -19,7 +19,8 @@ const SignIn = () => {
         e.preventDefault();
         const res = await fetchData(() => loginUser(form));
         if (res?.statusCode === 200) {
-            dispatch(setUser({ user: res.data.user, token: res.data.accessToken }));
+            dispatch(setUser({ user: res.data.user }));
+            dispatch(setToken({ token: res.data.accessToken }));
             navigate("/");
         }
     };

@@ -30,7 +30,7 @@ function Leaderboard() {
                                     <div class="bg-gray-800 shadow-lg flex flex-col w-full rounded-lg">
                                         <img
                                             src={leaderboard[1].avatar}
-                                            className="w-full h-[100px] rounded-lg"
+                                            className="w-full h-[130px] rounded-lg"
                                         />
                                         <p className="text-md text-white p-2 text-center">
                                             {leaderboard[1].username}
@@ -47,7 +47,7 @@ function Leaderboard() {
                                     <div class="bg-gray-800 shadow-lg flex flex-col w-full rounded-lg">
                                         <img
                                             src={leaderboard[0].avatar}
-                                            className="w-full h-[100px] rounded-lg"
+                                            className="w-full h-[130px] rounded-lg"
                                         />
                                         <p className="text-md text-white p-2 text-center">
                                             {leaderboard[0].username}
@@ -64,7 +64,7 @@ function Leaderboard() {
                                     <div class="bg-gray-800 shadow-lg flex flex-col w-full rounded-lg">
                                         <img
                                             src={leaderboard[2].avatar}
-                                            className="w-full h-[100px] rounded-lg"
+                                            className="w-full h-[130px] rounded-lg"
                                         />
                                         <p className="text-md text-white p-2 text-center">
                                             {leaderboard[2].username}
