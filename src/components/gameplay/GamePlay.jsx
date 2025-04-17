@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSocket } from "../../context/SocketContext";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const choices = [
     {
@@ -20,6 +21,7 @@ const choices = [
 
 const GamePlay = () => {
     const userId = useSelector((state) => state.auth.user?._id);
+    const navigate = useNavigate();
     const { matchId } = useParams();
     const { socket } = useSocket();
     const [selected, setSelected] = useState(null);
@@ -37,8 +39,8 @@ const GamePlay = () => {
 
         socket.on("roundResult", ({ winnerId, playerChoice, opponentChoice, scores }) => {
             // Correct event name
-            setSelected(playerChoice);
-            setOpponentChoice(opponentChoice);
+            setSelected(null);
+            setOpponentChoice(null);
             setWaiting(false);
             setScores(scores);
 
@@ -139,7 +141,7 @@ const GamePlay = () => {
 
             {finalWinner && (
                 <button
-                    onClick={() => (window.location.href = "/tournaments")}
+                    onClick={() => navigate(-1)}
                     className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
                 >
                     Back to Tournaments
