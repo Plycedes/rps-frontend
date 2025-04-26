@@ -1,7 +1,12 @@
 import axios from "axios";
 
+// const API = axios.create({
+//     baseURL: "http://localhost:8000/api/v1",
+//     withCredentials: true,
+// });
+
 const API = axios.create({
-    baseURL: "http://localhost:8000/api/v1",
+    baseURL: "https://rps-backend-tweq.onrender.com/api/v1",
     withCredentials: true,
 });
 

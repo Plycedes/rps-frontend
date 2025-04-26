@@ -34,7 +34,7 @@ const NFTCard = ({ nft, currentUserId, tab, onBuy, onList, onUnlist }) => {
                             {!nft.isListedForSale ? (
                                 <button
                                     onClick={() => onList(nft._id)}
-                                    className="mt-auto bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
+                                    className="mt-auto bg-purple-500 text-white px-1 py-2 rounded hover:bg-purple-600"
                                 >
                                     List for Sale
                                 </button>
