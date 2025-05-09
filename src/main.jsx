@@ -20,6 +20,7 @@ import {
     GamePlay,
     Admin,
     Mint,
+    ViewNFTs,
     CompleteTournament,
     CreateTournament,
 } from "./components";
@@ -76,6 +77,7 @@ const router = createBrowserRouter(
                 <Route path="" element={<CompleteTournament />} />
                 <Route path="mint" element={<Mint />} />
                 <Route path="create" element={<CreateTournament />} />
+                <Route path="view-nfts" element={<ViewNFTs />} />
             </Route>
         </>
     )

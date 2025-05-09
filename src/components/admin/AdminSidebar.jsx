@@ -33,6 +33,17 @@ function AdminSidebar() {
                                 </NavLink>
                             </li>
                             <li>
+                                <NavLink to="/admin/view-nfts">
+                                    <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
+                                        <img
+                                            src="https://img.icons8.com/?size=100&id=uG9G93p98cre&format=png&color=ad46ff"
+                                            className="w-7 h-7"
+                                        />
+                                        View NFTs
+                                    </div>
+                                </NavLink>
+                            </li>
+                            <li>
                                 <NavLink to="/admin">
                                     <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
                                         <img

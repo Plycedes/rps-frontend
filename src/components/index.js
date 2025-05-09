@@ -15,7 +15,8 @@ import TournamentsHistory from "./tournament/TournamentHistory";
 import TournamentSelection from "./gameplay/TournamentSelection";
 import Admin from "./admin/Admin";
 import AdminSidebar from "./admin/AdminSidebar";
-import Mint from "./admin/MInt";
+import Mint from "./admin/Mint";
+import ViewNFTs from "./admin/ViewNFTs";
 import CreateTournament from "./admin/CreateTournament";
 import CompleteTournament from "./admin/CompleteTournament";
 
@@ -38,6 +39,7 @@ export {
     Admin,
     AdminSidebar,
     Mint,
+    ViewNFTs,
     CompleteTournament,
     CreateTournament,
 };
