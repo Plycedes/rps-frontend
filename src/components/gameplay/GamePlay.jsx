@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSocket } from "../../context/SocketContext";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const choices = [
     {
@@ -22,6 +22,8 @@ const choices = [
 const GamePlay = () => {
     const userId = useSelector((state) => state.auth.user?._id);
     const navigate = useNavigate();
+    const location = useLocation();
+
     const { matchId } = useParams();
     const { socket } = useSocket();
     const [selected, setSelected] = useState(null);
@@ -33,14 +35,20 @@ const GamePlay = () => {
     const [finalWinner, setFinalWinner] = useState(null);
 
     useEffect(() => {
+        return () => {
+            console.log("You navigated away from GamePlay component!");
+            window.location.reload();
+        };
+    }, [location]);
+
+    useEffect(() => {
         if (!socket) return;
 
-        socket.emit("joinMatchRoom", { matchId }); // Correct event name
+        socket.emit("joinMatchRoom", { matchId });
 
         socket.on("roundResult", ({ winnerId, playerChoice, opponentChoice, scores }) => {
-            // Correct event name
-            setSelected(null);
-            setOpponentChoice(null);
+            setSelected(playerChoice);
+            setOpponentChoice(opponentChoice);
             setWaiting(false);
             setScores(scores);
 
@@ -56,7 +64,6 @@ const GamePlay = () => {
         });
 
         socket.on("finalResult", ({ winnerId, scores }) => {
-            // Correct event name
             setScores(scores);
             setWaiting(false);
 
@@ -69,16 +76,21 @@ const GamePlay = () => {
             }
         });
 
-        socket.on("waitingForOpponent", () => {
-            // Correct event name
+        socket.on("waitingForOpponentChoice", () => {
             setWaiting(true);
             setResult(null);
+        });
+
+        socket.on("opponentDisconnected", (data) => {
+            alert(data.message);
+            navigate(-1);
         });
 
         return () => {
             socket.off("roundResult");
             socket.off("finalResult");
-            socket.off("waitingForOpponent");
+            socket.off("waitingForOpponentChoice");
+            socket.off("opponentDisconnected");
         };
     }, [socket, matchId, userId]);
 

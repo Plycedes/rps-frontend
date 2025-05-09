@@ -8,7 +8,7 @@ export const SocketProvider = ({ children }) => {
     const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
-        const socket = io("https://rps-backend-tweq.onrender.com");
+        const socket = io("http://localhost:8000");
 
         socketRef.current = socket;
 
