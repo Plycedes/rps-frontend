@@ -115,3 +115,13 @@ export const mintNFT = async (data) => {
     const res = await API.post("/nfts/mint", data);
     return res.data;
 };
+
+export const completeTournament = async (data) => {
+    const res = await API.post("/tournaments/complete", data);
+    return res.data;
+};
+
+export const createTournament = async (data) => {
+    const res = await API.post("/tournaments/create", data);
+    return res.data;
+};
