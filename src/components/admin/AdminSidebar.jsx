@@ -1,6 +1,11 @@
 import { NavLink } from "react-router-dom";
 
 function AdminSidebar() {
+    const linkClasses = ({ isActive }) =>
+        `flex gap-2 items-center block py-2 px-4 rounded hover:bg-gray-700 ${
+            isActive ? "bg-gray-700" : ""
+        }`;
+
     return (
         <div className="flex">
             <div className="w-64 flex flex-col gap-10 bg-transparent text-white h-screen p-4">
@@ -22,47 +27,39 @@ function AdminSidebar() {
                     <div className="rounded bg-gray-800 p-2 h-full">
                         <ul className="text-xl my-1">
                             <li>
-                                <NavLink to="/admin/mint">
-                                    <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
-                                        <img
-                                            src="https://img.icons8.com/?size=100&id=RZhEJ5DGO5vJ&format=png&color=ad46ff"
-                                            className="w-7 h-7"
-                                        />
-                                        Mint
-                                    </div>
+                                <NavLink to="/admin/mint" className={linkClasses}>
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=RZhEJ5DGO5vJ&format=png&color=ad46ff"
+                                        className="w-7 h-7"
+                                    />
+                                    Mint
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/admin/view-nfts">
-                                    <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
-                                        <img
-                                            src="https://img.icons8.com/?size=100&id=uG9G93p98cre&format=png&color=ad46ff"
-                                            className="w-7 h-7"
-                                        />
-                                        View NFTs
-                                    </div>
+                                <NavLink to="/admin/view-nfts" className={linkClasses}>
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=uG9G93p98cre&format=png&color=ad46ff"
+                                        className="w-7 h-7"
+                                    />
+                                    View NFTs
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/admin">
-                                    <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
-                                        <img
-                                            src="https://img.icons8.com/?size=100&id=NuFBBv7mvFEA&format=png&color=ad46ff"
-                                            className="w-7 h-7"
-                                        />
-                                        Tournaments
-                                    </div>
+                                <NavLink to="/admin" end className={linkClasses}>
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=NuFBBv7mvFEA&format=png&color=ad46ff"
+                                        className="w-7 h-7"
+                                    />
+                                    Tournaments
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/admin/create">
-                                    <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
-                                        <img
-                                            src="https://img.icons8.com/?size=100&id=uSWplRVhqqlS&format=png&color=ad46ff"
-                                            className="w-7 h-7"
-                                        />
-                                        Create
-                                    </div>
+                                <NavLink to="/admin/create" className={linkClasses}>
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=uSWplRVhqqlS&format=png&color=ad46ff"
+                                        className="w-7 h-7"
+                                    />
+                                    Create
                                 </NavLink>
                             </li>
                         </ul>

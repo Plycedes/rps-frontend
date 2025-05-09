@@ -42,6 +42,12 @@ function Sidebar() {
             navigate("/");
         }
     };
+
+    const linkClasses = ({ isActive }) =>
+        `flex gap-2 items-center block py-2 px-4 rounded hover:bg-gray-700 ${
+            isActive ? "bg-gray-700" : ""
+        }`;
+
     return (
         <div className="flex">
             <div className="w-64 flex flex-col gap-10 bg-transparent text-white h-screen p-4">
@@ -82,69 +88,57 @@ function Sidebar() {
                     <div className="rounded bg-gray-800 p-2 h-full">
                         <ul className="text-xl my-1">
                             <li>
-                                <NavLink to="">
-                                    <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
-                                        <img
-                                            src="https://img.icons8.com/?size=100&id=GFDbOB2OqPWt&format=png&color=ad46ff"
-                                            className="w-7 h-7"
-                                        />
-                                        Play
-                                    </div>
+                                <NavLink to="" className={linkClasses}>
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=GFDbOB2OqPWt&format=png&color=ad46ff"
+                                        className="w-7 h-7"
+                                    />
+                                    Play
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="tournaments">
-                                    <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
-                                        <img
-                                            src="https://img.icons8.com/?size=100&id=NuFBBv7mvFEA&format=png&color=ad46ff"
-                                            className="w-7 h-7"
-                                        />
-                                        Tournaments
-                                    </div>
+                                <NavLink to="tournaments" className={linkClasses}>
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=NuFBBv7mvFEA&format=png&color=ad46ff"
+                                        className="w-7 h-7"
+                                    />
+                                    Tournaments
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="profile">
-                                    <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
-                                        <img
-                                            src="https://img.icons8.com/?size=100&id=Ib9FADThtmSf&format=png&color=ad46ff"
-                                            className="w-7 h-7"
-                                        />
-                                        Profile
-                                    </div>
+                                <NavLink to="profile" className={linkClasses}>
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=Ib9FADThtmSf&format=png&color=ad46ff"
+                                        className="w-7 h-7"
+                                    />
+                                    Profile
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="leaderboard">
-                                    <div className="flex gap-2 items-center block py-2 px-4 hover:bg-gray-700 rounded">
-                                        <img
-                                            src="https://img.icons8.com/?size=100&id=70624&format=png&color=ad46ff"
-                                            className="w-7 h-7"
-                                        />
-                                        Leaderboard
-                                    </div>
+                                <NavLink to="leaderboard" className={linkClasses}>
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=70624&format=png&color=ad46ff"
+                                        className="w-7 h-7"
+                                    />
+                                    Leaderboard
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="marketplace">
-                                    <div className="flex gap-2 items-center block pt-3 py-2 px-4 hover:bg-gray-700 rounded">
-                                        <img
-                                            src="https://img.icons8.com/?size=100&id=78230&format=png&color=ad46ff"
-                                            className="w-7 h-7"
-                                        />
-                                        Marketplace
-                                    </div>
+                                <NavLink to="marketplace" className={linkClasses}>
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=78230&format=png&color=ad46ff"
+                                        className="w-7 h-7"
+                                    />
+                                    Marketplace
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="contact-us">
-                                    <div className="flex gap-2 items-center block pt-3 py-2 px-4 hover:bg-gray-700 rounded">
-                                        <img
-                                            src="https://img.icons8.com/?size=100&id=2848&format=png&color=ad46ff"
-                                            className="w-7 h-7"
-                                        />
-                                        Contact Us
-                                    </div>
+                                <NavLink to="contact-us" className={linkClasses}>
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=2848&format=png&color=ad46ff"
+                                        className="w-7 h-7"
+                                    />
+                                    Contact Us
                                 </NavLink>
                             </li>
 
