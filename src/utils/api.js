@@ -107,7 +107,11 @@ export const getUserMatches = async () => {
 };
 
 export const changePFP = async (data) => {
-    console.log(data);
     const res = await API.post("/users/update-avatar", data);
+    return res.data;
+};
+
+export const mintNFT = async (data) => {
+    const res = await API.post("/nfts/mint", data);
     return res.data;
 };

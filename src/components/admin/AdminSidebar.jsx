@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 function AdminSidebar() {
-    const navigate = useNavigate();
     return (
         <div className="flex">
             <div className="w-64 flex flex-col gap-10 bg-transparent text-white h-screen p-4">
