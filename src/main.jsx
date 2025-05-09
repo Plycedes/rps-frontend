@@ -18,6 +18,10 @@ import {
     Tournament,
     ContactUs,
     GamePlay,
+    Admin,
+    Mint,
+    CompleteTournament,
+    CreateTournament,
 } from "./components";
 import { store } from "./redux/store.js";
 import { Provider, useSelector } from "react-redux";
@@ -60,6 +64,18 @@ const router = createBrowserRouter(
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/marketplace" element={<Marketplace />} />
                 <Route path="/contact-us" element={<ContactUs />} />
+            </Route>
+            <Route
+                path="/admin"
+                element={
+                    <ProtectedRoute>
+                        <Admin />
+                    </ProtectedRoute>
+                }
+            >
+                <Route path="" element={<CompleteTournament />} />
+                <Route path="mint" element={<Mint />} />
+                <Route path="create" element={<CreateTournament />} />
             </Route>
         </>
     )

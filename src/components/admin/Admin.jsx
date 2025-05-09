@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 function Admin() {
     return (
-        <div className="flex">
+        <div className="flex text-white">
             <div className="w-1/6">
                 <AdminSidebar />
             </div>
