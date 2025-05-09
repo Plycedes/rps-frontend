@@ -4,14 +4,14 @@ import { io } from "socket.io-client";
 const SocketContext = createContext();
 
 export const SocketProvider = ({ children }) => {
-    const socketRef = useRef(null);
+    const [socket, setSocket] = useState(null);
     const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
         //const socket = io("http://localhost:8000");
         const socket = io("https://rps-backend-tweq.onrender.com");
 
-        socketRef.current = socket;
+        setSocket(socket);
 
         socket.on("connect", () => setIsConnected(true));
         socket.on("disconnect", () => setIsConnected(false));
@@ -22,21 +22,21 @@ export const SocketProvider = ({ children }) => {
     }, []);
 
     const connectSocket = () => {
-        if (socketRef.current && !socketRef.current.connected) {
-            socketRef.current.connect();
+        if (socket && !socket.connected) {
+            socket.connect();
         }
     };
 
     const disconnectSocket = () => {
-        if (socketRef.current && socketRef.current.connected) {
-            socketRef.current.disconnect();
+        if (socket && socket.connected) {
+            socket.disconnect();
         }
     };
 
     return (
         <SocketContext.Provider
             value={{
-                socket: socketRef.current,
+                socket: socket,
                 connectSocket,
                 disconnectSocket,
                 isConnected,
