@@ -14,10 +14,10 @@ export const NFTItem = ({ nft }) => {
         }
     };
     return (
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
             <img src={nft.imageUrl} className="w-25 h-25 rounded-lg border border-purple-500 p-1" />
-            <div className="flex flex-col gap-4">
-                <h2 className="text-xl font-semibold text-purple-400">{nft.name}</h2>
+            <div className="flex flex-col gap-2">
+                <h2 className="text-2xl font-semibold text-purple-400">{nft.name}</h2>
                 <div className="flex items-center justify-between bg-gray-800 text-white p-3 rounded border border-gray-600 w-fit max-w-full">
                     <span className="truncate">{nft._id}</span>
                     <button

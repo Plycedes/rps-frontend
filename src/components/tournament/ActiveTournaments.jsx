@@ -20,26 +20,34 @@ const ActiveTournaments = () => {
     return (
         <div className="space-y-4">
             {loading && <Loader />}
-            {tournaments.map((t) => (
-                <Link
-                    key={t._id}
-                    to={`/tournament/${t._id}`}
-                    className="bg-gray-800 p-4 shadow-md flex justify-between rounded-lg"
-                >
-                    <div>
-                        <h2 className="text-xl font-semibold text-purple-400">{t.name}</h2>
-                        <div className="flex gap-5">
-                            <p className="text-sm text-zinc-400">Status: {t.status}</p>
+            {tournaments.length > 0 ? (
+                <div>
+                    {tournaments.map((t) => (
+                        <Link
+                            key={t._id}
+                            to={`/tournament/${t._id}`}
+                            className="bg-gray-800 p-4 shadow-md flex justify-between rounded-lg"
+                        >
+                            <div>
+                                <h2 className="text-xl font-semibold text-purple-400">{t.name}</h2>
+                                <div className="flex gap-5">
+                                    <p className="text-sm text-zinc-400">Status: {t.status}</p>
+                                    <p className="text-sm text-zinc-400">
+                                        Participants: {t.participantsCount || "N/A"}
+                                    </p>
+                                </div>
+                            </div>
                             <p className="text-sm text-zinc-400">
-                                Participants: {t.participantsCount || "N/A"}
+                                Ends on: {new Date(t.endDate).toLocaleString()}
                             </p>
-                        </div>
-                    </div>
-                    <p className="text-sm text-zinc-400">
-                        Ends on: {new Date(t.endDate).toLocaleString()}
-                    </p>
-                </Link>
-            ))}
+                        </Link>
+                    ))}
+                </div>
+            ) : (
+                <div className="flex justify-center text-3xl text-gray-500">
+                    No active tournaments
+                </div>
+            )}
         </div>
     );
 };

@@ -20,7 +20,7 @@ const CompleteTournament = () => {
 
     const handleCompletion = async (tournamentId) => {
         const res = fetchData(() => completeTournament({ tournamentId }));
-        if (res.statusCode == 200) {
+        if (res?.statusCode === 200 || res?.statusCode === 201) {
             toast(res.message, {
                 autoClose: 3000,
                 theme: "dark",
@@ -37,32 +37,42 @@ const CompleteTournament = () => {
             >
                 {loading && <Loader />}
                 <ToastContainer />
-                {tournaments.map((t) => (
-                    <div
-                        key={t._id}
-                        className="bg-gray-800 p-4 shadow-md flex justify-between rounded-lg items-center"
-                    >
-                        <div>
-                            <h2 className="text-xl font-semibold text-purple-400">{t.name}</h2>
-                            <div className="flex gap-5">
-                                <p className="text-sm text-zinc-400">Status: {t.status}</p>
-                                <p className="text-sm text-zinc-400">
-                                    Participants: {t.participantsCount || "N/A"}
-                                </p>
+                {tournaments.length > 0 ? (
+                    <div>
+                        {tournaments.map((t) => (
+                            <div
+                                key={t._id}
+                                className="bg-gray-800 p-4 shadow-md flex justify-between rounded-lg items-center"
+                            >
+                                <div>
+                                    <h2 className="text-xl font-semibold text-purple-400">
+                                        {t.name}
+                                    </h2>
+                                    <div className="flex gap-5">
+                                        <p className="text-sm text-zinc-400">Status: {t.status}</p>
+                                        <p className="text-sm text-zinc-400">
+                                            Participants: {t.participantsCount || "N/A"}
+                                        </p>
+                                    </div>
+                                </div>
+                                <button
+                                    className="flex items-center justify-center gap-1 bg-primary mt-3 px-4 text-white py-2 rounded hover:bg-purple-800 focus:outline-none text-xl"
+                                    onClick={() => handleCompletion(t._id)}
+                                >
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=11697&format=png&color=FFFFFF"
+                                        className="w-7 h-7"
+                                    />
+                                    <p className="mb-1">{loading ? "Completing..." : "Complete"}</p>
+                                </button>
                             </div>
-                        </div>
-                        <button
-                            className="flex items-center justify-center gap-1 bg-primary mt-3 px-4 text-white py-2 rounded hover:bg-purple-800 focus:outline-none text-xl"
-                            onClick={() => handleCompletion(t._id)}
-                        >
-                            <img
-                                src="https://img.icons8.com/?size=100&id=11697&format=png&color=FFFFFF"
-                                className="w-7 h-7"
-                            />
-                            <p className="mb-1">{loading ? "Completing..." : "Complete"}</p>
-                        </button>
+                        ))}
                     </div>
-                ))}
+                ) : (
+                    <div className="flex justify-center text-3xl text-gray-500">
+                        No active tournaments
+                    </div>
+                )}
             </div>
         </div>
     );
