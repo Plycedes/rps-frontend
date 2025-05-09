@@ -31,12 +31,13 @@ const CompleteTournament = () => {
 
     return (
         <div className="p-2 w-full h-full">
+            {loading && <Loader />}
+            <ToastContainer />
             <div
                 className="space-y-4 overflow-y-auto scrollbar-thin scrollbar-thumb-purple-800 scrollbar-track-transparent w-full h-full
             border border-purple-500 rounded-lg p-4"
             >
-                {loading && <Loader />}
-                <ToastContainer />
+                <p className="text-center font-semibold text-3xl text-primary">Admin NFTs</p>
                 {tournaments.length > 0 ? (
                     <div>
                         {tournaments.map((t) => (

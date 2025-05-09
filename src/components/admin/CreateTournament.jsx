@@ -54,7 +54,7 @@ function CreateTournament() {
         <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white px-4">
             <ToastContainer />
             {loading && <Loader />}
-            <div className="flex flex-col p-10 border border-purple-500 rounded-xl items-center gap-4">
+            <div className="flex flex-col p-12 border border-purple-500 rounded-xl items-center gap-4">
                 <div className="flex gap-2 items-center mb-4">
                     <img
                         src="https://img.icons8.com/?size=100&id=48&format=png&color=ad46ff"

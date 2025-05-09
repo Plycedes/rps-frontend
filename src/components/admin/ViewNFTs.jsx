@@ -17,12 +17,13 @@ function ViewNFTs() {
 
     return (
         <div className="px-2 py-4 w-full h-full">
+            {loading && <Loader />}
+            {error && <p className="text-red-500">{error}</p>}
             <div
                 className="space-y-4 overflow-y-auto scrollbar-thin scrollbar-thumb-purple-800 scrollbar-track-transparent w-full h-full
             border border-purple-500 rounded-lg p-4"
             >
-                {loading && <Loader />}
-                {error && <p className="text-red-500">{error}</p>}
+                <p className="text-center font-semibold text-3xl text-primary">Admin NFTs</p>
                 {adminNFT.map((nft) => (
                     <p key={nft._id}>
                         {nft.tournament == null && (
