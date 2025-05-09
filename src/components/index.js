@@ -13,6 +13,11 @@ import GamePlay from "./gameplay/GamePlay";
 import ActiveTournaments from "./tournament/ActiveTournaments";
 import TournamentsHistory from "./tournament/TournamentHistory";
 import TournamentSelection from "./gameplay/TournamentSelection";
+import Admin from "./admin/Admin";
+import AdminSidebar from "./admin/AdminSidebar";
+import Mint from "./admin/MInt";
+import CreateTournament from "./admin/CreateTournament";
+import CompleteTournament from "./admin/CompleteTournament";
 
 export {
     NFT,
@@ -30,4 +35,9 @@ export {
     ActiveTournaments,
     TournamentsHistory,
     TournamentSelection,
+    Admin,
+    AdminSidebar,
+    Mint,
+    CompleteTournament,
+    CreateTournament,
 };
