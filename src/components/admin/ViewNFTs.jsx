@@ -24,11 +24,12 @@ function ViewNFTs() {
                 {loading && <Loader />}
                 {error && <p className="text-red-500">{error}</p>}
                 {adminNFT.map((nft) => (
-                    <p
-                        key={nft._id}
-                        className="bg-gray-800 p-4 shadow-md flex justify-between rounded-lg items-center"
-                    >
-                        <NFTItem nft={nft} />
+                    <p key={nft._id}>
+                        {nft.tournament == null && (
+                            <div className="bg-gray-800 p-4 shadow-md flex justify-between rounded-lg items-center">
+                                <NFTItem nft={nft} />
+                            </div>
+                        )}
                     </p>
                 ))}
             </div>

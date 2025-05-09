@@ -1,7 +1,8 @@
 import { useAxios } from "../../hooks/useAxios.js";
 import { useEffect, useState } from "react";
-import { getActiveTournaments } from "../../utils/api";
+import { getActiveTournaments, completeTournament } from "../../utils/api";
 import Loader from "../Loader";
+import { ToastContainer, toast } from "react-toastify";
 
 const CompleteTournament = () => {
     const { loading, error, fetchData } = useAxios();
@@ -17,7 +18,16 @@ const CompleteTournament = () => {
         })();
     }, [reRender]);
 
-    const handleCompletion = async (tournamentId) => {};
+    const handleCompletion = async (tournamentId) => {
+        const res = fetchData(() => completeTournament({ tournamentId }));
+        if (res.statusCode == 200) {
+            toast(res.message, {
+                autoClose: 3000,
+                theme: "dark",
+            });
+        }
+        setReRender((prev) => !prev);
+    };
 
     return (
         <div className="p-2 w-full h-full">
@@ -26,8 +36,9 @@ const CompleteTournament = () => {
             border border-purple-500 rounded-lg p-4"
             >
                 {loading && <Loader />}
+                <ToastContainer />
                 {tournaments.map((t) => (
-                    <p
+                    <div
                         key={t._id}
                         className="bg-gray-800 p-4 shadow-md flex justify-between rounded-lg items-center"
                     >
@@ -50,7 +61,7 @@ const CompleteTournament = () => {
                             />
                             <p className="mb-1">{loading ? "Completing..." : "Complete"}</p>
                         </button>
-                    </p>
+                    </div>
                 ))}
             </div>
         </div>
