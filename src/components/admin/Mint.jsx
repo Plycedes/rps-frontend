@@ -3,6 +3,11 @@ import { useAxios } from "../../hooks/useAxios";
 import { mintNFT } from "../../utils/api";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "../Loader";
+import {
+    mintNFTWithBroadcast,
+    viewNFTWithBroadcast,
+    transferNFTWithBroadcast,
+} from "../../utils/blockchainApi";
 
 function Mint() {
     const [form, setForm] = useState({ name: "", nftImg: null });
@@ -23,7 +28,10 @@ function Mint() {
         formData.append("name", form.name);
         formData.append("nftImg", form.nftImg);
 
-        const res = await fetchData(() => mintNFT(formData));
+        //const res = await fetchData(() => mintNFT(formData));
+        const res = await mintNFTWithBroadcast(
+            "https://res.cloudinary.com/dxsffcg6l/image/upload/v1744889434/Screenshot_2025-04-17_165730_dew98g.png"
+        );
 
         if (res?.statusCode === 201 || res?.statusCode === 200) {
             toast(res.message, {

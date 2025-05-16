@@ -1,14 +1,14 @@
 import axios from "axios";
 
-// const API = axios.create({
-//     baseURL: "http://localhost:8000/api/v1",
-//     withCredentials: true,
-// });
-
 const API = axios.create({
-    baseURL: "https://rps-backend-tweq.onrender.com/api/v1",
+    baseURL: "http://localhost:8000/api/v1",
     withCredentials: true,
 });
+
+// const API = axios.create({
+//     baseURL: "https://rps-backend-tweq.onrender.com/api/v1",
+//     withCredentials: true,
+// });
 
 API.interceptors.request.use(
     function (config) {

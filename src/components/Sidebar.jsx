@@ -14,6 +14,7 @@ function Sidebar() {
     const { loading, error, fetchData } = useAxios();
 
     const [account, setAccount] = useState(localStorage.getItem("account"));
+    const [key, setKey] = useState(localStorage.getItem("key"));
 
     useEffect(() => {
         window.ethereum.on("accountsChanged", accountWasChanged);
@@ -149,17 +150,20 @@ function Sidebar() {
                                 <div className="my-4">
                                     <input
                                         className="block py-2 px-4 bg-gray-700 rounded w-full"
-                                        placeholder="Search"
+                                        placeholder="Signing Key"
+                                        onChange={(e) => setKey(e.target.value)}
                                     />
                                     <button
-                                        className="flex items-center justify-center gap-1 bg-primary mt-3 w-full text-white py-2 rounded hover:bg-purple-800 focus:outline-none text-xl"
-                                        onClick={() => {}}
+                                        className="flex items-center justify-center gap-2 bg-primary mt-3 w-full text-white py-2 rounded hover:bg-purple-800 focus:outline-none text-xl"
+                                        onClick={() => {
+                                            localStorage.setItem("key", key);
+                                        }}
                                     >
                                         <img
-                                            src="https://img.icons8.com/?size=100&id=7695&format=png&color=FFFFFF"
-                                            className="w-7 h-7 mt-1"
+                                            src="https://img.icons8.com/?size=100&id=2896&format=png&color=FFFFFF"
+                                            className="w-6 h-6 mt-1"
                                         />
-                                        Search
+                                        Set Key
                                     </button>
                                 </div>
                             </li>
@@ -167,12 +171,12 @@ function Sidebar() {
                                 <hr className="my-3 border-t-2 border-gray-400" />
                             </li>
                             <button
-                                className="flex items-center justify-center gap-1 bg-gray-600 mt-3 w-full text-white py-2 rounded hover:bg-purple-800 focus:outline-none text-xl"
+                                className="flex items-center justify-center gap-2 bg-gray-600 mt-3 w-full text-white py-2 rounded hover:bg-purple-800 focus:outline-none text-xl"
                                 onClick={handleLogout}
                             >
                                 <img
                                     src="https://img.icons8.com/?size=100&id=26217&format=png&color=FFFFFF"
-                                    className="w-7 h-7 mt-1"
+                                    className="w-6 h-6 mt-1"
                                 />
                                 {loading ? "Logging out..." : "Logout"}
                             </button>
