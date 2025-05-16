@@ -29,17 +29,25 @@ function Mint() {
         formData.append("nftImg", form.nftImg);
 
         //const res = await fetchData(() => mintNFT(formData));
-        const res = await mintNFTWithBroadcast(
-            "https://res.cloudinary.com/dxsffcg6l/image/upload/v1744889434/Screenshot_2025-04-17_165730_dew98g.png"
+
+        // if (res?.statusCode === 201 || res?.statusCode === 200) {
+        //     toast(res.message, {
+        //         autoClose: 3000,
+        //         theme: "dark",
+        //     });
+        // }
+        // setForm({ name: "", nftImg: null });
+
+        const txres = await mintNFTWithBroadcast(
+            "https://res.cloudinary.com/dxsffcg6l/image/upload/v1746779864/aw63olcvwr0cgozrms2s.jpg"
         );
 
-        if (res?.statusCode === 201 || res?.statusCode === 200) {
-            toast(res.message, {
+        if (txres.tokenId) {
+            toast("NFT minted on-chain", {
                 autoClose: 3000,
                 theme: "dark",
             });
         }
-        setForm({ name: "", nftImg: null });
     };
 
     return (

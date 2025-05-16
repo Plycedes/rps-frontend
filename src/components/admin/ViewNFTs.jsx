@@ -25,13 +25,13 @@ function ViewNFTs() {
             >
                 <p className="text-center font-semibold text-3xl text-primary">Admin NFTs</p>
                 {adminNFT.map((nft) => (
-                    <p key={nft._id}>
+                    <div key={nft._id}>
                         {nft.tournament == null && (
                             <div className="bg-gray-800 p-4 shadow-md flex justify-between rounded-lg items-center">
                                 <NFTItem nft={nft} />
                             </div>
                         )}
-                    </p>
+                    </div>
                 ))}
             </div>
         </div>

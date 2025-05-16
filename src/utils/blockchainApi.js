@@ -24,7 +24,12 @@ const provider = new ethers.JsonRpcProvider(
     "https://sepolia.infura.io/v3/6d70dc9586e04d1e9f9a060d1d58c76a"
 );
 
-const wallet = new ethers.Wallet(signingKey, provider);
+let wallet;
+try {
+    wallet = new ethers.Wallet(signingKey, provider);
+} catch (error) {
+    console.log(error);
+}
 
 const iface = new ethers.Interface(ABIV2);
 
