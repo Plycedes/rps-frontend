@@ -26,6 +26,7 @@ const Marketplace = () => {
         nftId: null,
         name: null,
         tokenId: null,
+        listedPrice: null,
     });
     const [reRender, setReRender] = useState(false);
 
@@ -47,22 +48,33 @@ const Marketplace = () => {
         fetchUserNFTs();
     }, [user, reRender]);
 
-    const openDialog = (type, nftId, name, tokenId) => {
-        setDialog({ visible: true, type, nftId, name, tokenId });
+    const openDialog = (type, nftId, name, tokenId, listedPrice) => {
+        setDialog({ visible: true, type, nftId, name, tokenId, listedPrice });
     };
 
     const closeDialog = () => {
-        setDialog({ visible: false, type: null, nftId: null, tokenId: null });
+        setDialog({ visible: false, type: null, nftId: null, tokenId: null, listedPrice: null });
     };
 
-    const handleDialogConfirm = async (nftId, tokenId, price = null) => {
-        console.log(`Confirmed ${dialog.type} for NFT`, nftId, price, tokenId);
+    const handleDialogConfirm = async (nftId, tokenId, listedPrice = null, price = null) => {
+        console.log(`Confirmed ${dialog.type} for NFT`, nftId, price, tokenId, listedPrice);
         if (dialog.type === "buy") {
             const res = await fetchData(() => buytNFT({ nftId }));
             toast(res.message, {
                 autoClose: 3000,
                 theme: "dark",
             });
+
+            const web3Price = (listedPrice / 10000).toString();
+            const txres = await buyNFTWithBroadcast(tokenId, web3Price);
+            console.log(web3Price);
+
+            if (txres.txHash) {
+                toast("Bought NFT on-chain", {
+                    autoClose: 3000,
+                    theme: "dark",
+                });
+            }
         } else if (dialog.type === "list") {
             const res = await fetchData(() => listNFT({ nftId, price }));
             toast(res.message, {
@@ -119,10 +131,14 @@ const Marketplace = () => {
                                 nft={nft}
                                 currentUserId={user._id}
                                 tab={tab}
-                                onBuy={() => openDialog("buy", nft._id, nft.name, nft.tokenId)}
-                                onList={() => openDialog("list", nft._id, nft.name, nft.tokenId)}
+                                onBuy={() =>
+                                    openDialog("buy", nft._id, nft.name, nft.tokenId, nft.price)
+                                }
+                                onList={() =>
+                                    openDialog("list", nft._id, nft.name, nft.tokenId, nft.price)
+                                }
                                 onUnlist={() =>
-                                    openDialog("unlist", nft._id, nft.name, nft.tokenId)
+                                    openDialog("unlist", nft._id, nft.name, nft.tokenId, nft.price)
                                 }
                             />
                         ))
@@ -141,6 +157,7 @@ const Marketplace = () => {
                     type={dialog.type}
                     name={dialog.name}
                     tokenId={dialog.tokenId}
+                    listedPrice={dialog.listedPrice}
                 />
             </div>
         </div>
