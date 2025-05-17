@@ -26,7 +26,7 @@ const ActiveTournaments = () => {
                         <Link
                             key={t._id}
                             to={`/tournament/${t._id}`}
-                            className="bg-gray-800 p-4 shadow-md flex justify-between rounded-lg"
+                            className="bg-gray-800 p-4 shadow-md flex justify-between rounded-lg mb-4"
                         >
                             <div>
                                 <h2 className="text-xl font-semibold text-purple-400">{t.name}</h2>

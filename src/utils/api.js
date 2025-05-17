@@ -96,6 +96,11 @@ export const buytNFT = async (data) => {
     return res.data;
 };
 
+export const setNFTTokenId = async (data) => {
+    const res = await API.post("/nfts/set-token", data);
+    return res.data;
+};
+
 export const getUserParticipatedTournaments = async () => {
     const res = await API.get("/tournaments/get-user");
     return res.data;

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getActiveTournaments, completeTournament } from "../../utils/api";
 import Loader from "../Loader";
 import { ToastContainer, toast } from "react-toastify";
+import { transferNFTWithBroadcast } from "../../utils/blockchainApi.js";
 
 const CompleteTournament = () => {
     const { loading, error, fetchData } = useAxios();
@@ -19,9 +20,18 @@ const CompleteTournament = () => {
     }, [reRender]);
 
     const handleCompletion = async (tournamentId) => {
-        const res = fetchData(() => completeTournament({ tournamentId }));
+        const res = await fetchData(() => completeTournament({ tournamentId }));
         if (res?.statusCode === 200 || res?.statusCode === 201) {
             toast(res.message, {
+                autoClose: 3000,
+                theme: "dark",
+            });
+        }
+        console.log(res.data);
+        const txres = await transferNFTWithBroadcast(res.data.nftTokenId, res.data.winnerWalletId);
+
+        if (txres?.txHash) {
+            toast("NFT transferred on-chain", {
                 autoClose: 3000,
                 theme: "dark",
             });
@@ -39,7 +49,7 @@ const CompleteTournament = () => {
             >
                 <p className="text-center font-semibold text-3xl text-primary">Admin NFTs</p>
                 {tournaments.length > 0 ? (
-                    <div>
+                    <div className="flex flex-col gap-4">
                         {tournaments.map((t) => (
                             <div
                                 key={t._id}

@@ -92,15 +92,6 @@ export async function mintNFTWithBroadcast(tokenURI) {
 
 export async function viewNFTWithBroadcast(tokenId) {
     try {
-        console.log("In trycatch");
-        const provider = new ethers.JsonRpcProvider(
-            "https://sepolia.infura.io/v3/6d70dc9586e04d1e9f9a060d1d58c76a"
-        );
-
-        const wallet = new ethers.Wallet(signingKey, provider);
-
-        const iface = new ethers.Interface(ABIV2);
-
         const estimatedGas = await provider.estimateGas({
             to: contractAddressV2,
             data: iface.encodeFunctionData("getTokenURI", [tokenId]),
@@ -131,14 +122,12 @@ export async function viewNFTWithBroadcast(tokenId) {
 
 export async function transferNFTWithBroadcast(tokenId, winner) {
     try {
-        console.log("In trycatch");
-        const provider = new ethers.JsonRpcProvider(
-            "https://sepolia.infura.io/v3/6d70dc9586e04d1e9f9a060d1d58c76a"
-        );
-
-        const wallet = new ethers.Wallet(signingKey, provider);
-
-        const iface = new ethers.Interface(ABIV2);
+        const browserProvider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await browserProvider.getSigner();
+        const nftContract = new ethers.Contract(contractAddressV2, ABIV2, signer);
+        const currentOwner = await nftContract.ownerOf(tokenId);
+        console.log("Current Owner:", currentOwner);
+        console.log("Wallet Address:", wallet.address);
 
         const estimatedGas = await provider.estimateGas({
             to: contractAddressV2,
@@ -163,6 +152,7 @@ export async function transferNFTWithBroadcast(tokenId, winner) {
         });
 
         console.log("Transaction hash:", res.data);
+        return res.data;
     } catch (error) {
         console.log(error);
     }
@@ -170,15 +160,6 @@ export async function transferNFTWithBroadcast(tokenId, winner) {
 
 export async function unlistNFTWithBroadcast(tokenId) {
     try {
-        console.log("In trycatch");
-        const provider = new ethers.JsonRpcProvider(
-            "https://sepolia.infura.io/v3/6d70dc9586e04d1e9f9a060d1d58c76a"
-        );
-
-        const wallet = new ethers.Wallet(signingKey, provider);
-
-        const iface = new ethers.Interface(ABIV2);
-
         const estimatedGas = await provider.estimateGas({
             to: contractAddressV2,
             data: iface.encodeFunctionData("unlistNFT", [tokenId]),
@@ -209,8 +190,6 @@ export async function unlistNFTWithBroadcast(tokenId) {
 
 export async function listNFTWithBroadcast(tokenId, price) {
     try {
-        console.log("In trycatch");
-
         const estimatedGas = await provider.estimateGas({
             to: contractAddressV2,
             data: iface.encodeFunctionData("listNFT", [tokenId, price]),
@@ -222,6 +201,38 @@ export async function listNFTWithBroadcast(tokenId, price) {
         const unsignedTx = await wallet.populateTransaction({
             to: contractAddressV2,
             data: iface.encodeFunctionData("listNFT", [tokenId, price]),
+            chainId: 11155111,
+            gasLimit,
+        });
+
+        const rawTx = await wallet.signTransaction(unsignedTx);
+        console.log(rawTx);
+
+        const res = await axios.post("http://localhost:5002/api/tx/broadcast", {
+            rawTransaction: rawTx,
+        });
+
+        console.log("Transaction hash:", res.data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function buyNFTWithBroadcast(tokenId, priceInEth) {
+    try {
+        const estimatedGas = await provider.estimateGas({
+            to: contractAddressV2,
+            data: iface.encodeFunctionData("buyNFT", [tokenId]),
+            value: ethers.parseEther(priceInEth),
+            from: wallet.address,
+        });
+
+        const gasLimit = (estimatedGas * 12n) / 10n;
+
+        const unsignedTx = await wallet.populateTransaction({
+            to: contractAddressV2,
+            data: iface.encodeFunctionData("buyNFT", [tokenId]),
+            value: ethers.parseEther(priceInEth),
             chainId: 11155111,
             gasLimit,
         });

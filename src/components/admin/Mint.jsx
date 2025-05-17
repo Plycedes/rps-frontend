@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { useAxios } from "../../hooks/useAxios";
-import { mintNFT } from "../../utils/api";
+import { mintNFT, setNFTTokenId } from "../../utils/api";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "../Loader";
-import {
-    mintNFTWithBroadcast,
-    viewNFTWithBroadcast,
-    transferNFTWithBroadcast,
-} from "../../utils/blockchainApi";
+import { mintNFTWithBroadcast } from "../../utils/blockchainApi";
 
 function Mint() {
     const [form, setForm] = useState({ name: "", nftImg: null });
@@ -28,25 +24,34 @@ function Mint() {
         formData.append("name", form.name);
         formData.append("nftImg", form.nftImg);
 
-        //const res = await fetchData(() => mintNFT(formData));
+        const res = await fetchData(() => mintNFT(formData));
 
-        // if (res?.statusCode === 201 || res?.statusCode === 200) {
-        //     toast(res.message, {
-        //         autoClose: 3000,
-        //         theme: "dark",
-        //     });
-        // }
-        // setForm({ name: "", nftImg: null });
+        if (res?.statusCode === 201 || res?.statusCode === 200) {
+            toast(res.message, {
+                autoClose: 3000,
+                theme: "dark",
+            });
+        }
+        setForm({ name: "", nftImg: null });
+        console.log(res.data);
 
-        const txres = await mintNFTWithBroadcast(
-            "https://res.cloudinary.com/dxsffcg6l/image/upload/v1746779864/aw63olcvwr0cgozrms2s.jpg"
-        );
+        const txres = await mintNFTWithBroadcast(res.data.imageUrl);
 
-        if (txres.tokenId) {
+        if (txres?.tokenId) {
+            const result = await fetchData(() =>
+                setNFTTokenId({ tokenId: txres.tokenId, nftId: res.data._id })
+            );
+            console.log(result.data);
             toast("NFT minted on-chain", {
                 autoClose: 3000,
                 theme: "dark",
             });
+            if (result?.statusCode === 201 || result?.statusCode === 200) {
+                toast(result.message, {
+                    autoClose: 3000,
+                    theme: "dark",
+                });
+            }
         }
     };
 
