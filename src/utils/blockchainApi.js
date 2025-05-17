@@ -18,6 +18,10 @@ export const connect = async () => {
     }
 };
 
+const API = axios.create({
+    baseURL: "http://localhost:5002/api/tx",
+});
+
 const signingKey = localStorage.getItem("key");
 
 const provider = new ethers.JsonRpcProvider(
@@ -147,7 +151,7 @@ export async function transferNFTWithBroadcast(tokenId, winner) {
         const rawTx = await wallet.signTransaction(unsignedTx);
         console.log(rawTx);
 
-        const res = await axios.post("http://localhost:5002/api/tx/broadcast", {
+        const res = await API.post("/broadcast", {
             rawTransaction: rawTx,
         });
 
@@ -178,11 +182,12 @@ export async function unlistNFTWithBroadcast(tokenId) {
         const rawTx = await wallet.signTransaction(unsignedTx);
         console.log(rawTx);
 
-        const res = await axios.post("http://localhost:5002/api/tx/broadcast", {
+        const res = await API.post("/broadcast", {
             rawTransaction: rawTx,
         });
 
         console.log("Transaction hash:", res.data);
+        return res.data;
     } catch (error) {
         console.log(error);
     }
@@ -208,11 +213,12 @@ export async function listNFTWithBroadcast(tokenId, price) {
         const rawTx = await wallet.signTransaction(unsignedTx);
         console.log(rawTx);
 
-        const res = await axios.post("http://localhost:5002/api/tx/broadcast", {
+        const res = await API.post("/broadcast", {
             rawTransaction: rawTx,
         });
 
         console.log("Transaction hash:", res.data);
+        return res.data;
     } catch (error) {
         console.log(error);
     }
@@ -240,11 +246,12 @@ export async function buyNFTWithBroadcast(tokenId, priceInEth) {
         const rawTx = await wallet.signTransaction(unsignedTx);
         console.log(rawTx);
 
-        const res = await axios.post("http://localhost:5002/api/tx/broadcast", {
+        const res = await API.post("/broadcast", {
             rawTransaction: rawTx,
         });
 
         console.log("Transaction hash:", res.data);
+        return res.data;
     } catch (error) {
         console.log(error);
     }

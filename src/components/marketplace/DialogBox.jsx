@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-const DialogBox = ({ visible, onClose, onConfirm, nftId, type, name }) => {
+const DialogBox = ({ visible, onClose, onConfirm, nftId, type, name, tokenId }) => {
     const [price, setPrice] = useState("");
 
     const handleConfirm = () => {
         if (type === "list") {
             if (!price || isNaN(price)) return alert("Enter a valid price");
-            onConfirm(nftId, price);
+            onConfirm(nftId, tokenId, price);
         } else {
-            onConfirm(nftId);
+            onConfirm(nftId, tokenId);
         }
         onClose();
     };

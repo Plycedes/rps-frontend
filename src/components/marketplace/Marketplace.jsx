@@ -7,6 +7,12 @@ import DialogBox from "./DialogBox";
 import Loader from "../Loader";
 import { ToastContainer, toast } from "react-toastify";
 import { getUserNFTs, getListedNFTs, listNFT, unListNFT, buytNFT } from "../../utils/api";
+import {
+    buyNFTWithBroadcast,
+    listNFTWithBroadcast,
+    unlistNFTWithBroadcast,
+} from "../../utils/blockchainApi";
+import { ethers } from "ethers";
 
 const Marketplace = () => {
     const { loading, error, fetchData } = useAxios();
@@ -19,6 +25,7 @@ const Marketplace = () => {
         type: null,
         nftId: null,
         name: null,
+        tokenId: null,
     });
     const [reRender, setReRender] = useState(false);
 
@@ -40,16 +47,16 @@ const Marketplace = () => {
         fetchUserNFTs();
     }, [user, reRender]);
 
-    const openDialog = (type, nftId, name) => {
-        setDialog({ visible: true, type, nftId, name });
+    const openDialog = (type, nftId, name, tokenId) => {
+        setDialog({ visible: true, type, nftId, name, tokenId });
     };
 
     const closeDialog = () => {
-        setDialog({ visible: false, type: null, nftId: null });
+        setDialog({ visible: false, type: null, nftId: null, tokenId: null });
     };
 
-    const handleDialogConfirm = async (nftId, price = null) => {
-        console.log(`Confirmed ${dialog.type} for NFT`, nftId, price);
+    const handleDialogConfirm = async (nftId, tokenId, price = null) => {
+        console.log(`Confirmed ${dialog.type} for NFT`, nftId, price, tokenId);
         if (dialog.type === "buy") {
             const res = await fetchData(() => buytNFT({ nftId }));
             toast(res.message, {
@@ -62,12 +69,33 @@ const Marketplace = () => {
                 autoClose: 3000,
                 theme: "dark",
             });
+
+            const web3Price = ethers.parseEther((price / 10000).toString());
+            const txres = await listNFTWithBroadcast(tokenId, web3Price);
+            console.log(txres);
+
+            if (txres.txHash) {
+                toast("Listed NFT on-chain", {
+                    autoClose: 3000,
+                    theme: "dark",
+                });
+            }
         } else if (dialog.type === "unlist") {
             const res = await fetchData(() => unListNFT({ nftId }));
             toast(res.message, {
                 autoClose: 3000,
                 theme: "dark",
             });
+
+            const txres = await unlistNFTWithBroadcast(tokenId);
+            console.log(txres);
+
+            if (txres.txHash) {
+                toast("Unlisted NFT on-chain", {
+                    autoClose: 3000,
+                    theme: "dark",
+                });
+            }
         }
         setReRender((prev) => !prev);
     };
@@ -91,9 +119,11 @@ const Marketplace = () => {
                                 nft={nft}
                                 currentUserId={user._id}
                                 tab={tab}
-                                onBuy={() => openDialog("buy", nft._id, nft.name)}
-                                onList={() => openDialog("list", nft._id, nft.name)}
-                                onUnlist={() => openDialog("unlist", nft._id, nft.name)}
+                                onBuy={() => openDialog("buy", nft._id, nft.name, nft.tokenId)}
+                                onList={() => openDialog("list", nft._id, nft.name, nft.tokenId)}
+                                onUnlist={() =>
+                                    openDialog("unlist", nft._id, nft.name, nft.tokenId)
+                                }
                             />
                         ))
                     ) : (
@@ -110,6 +140,7 @@ const Marketplace = () => {
                     nftId={dialog.nftId}
                     type={dialog.type}
                     name={dialog.name}
+                    tokenId={dialog.tokenId}
                 />
             </div>
         </div>
