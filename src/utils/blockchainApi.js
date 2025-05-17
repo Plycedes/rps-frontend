@@ -18,8 +18,12 @@ export const connect = async () => {
     }
 };
 
+// const API = axios.create({
+//     baseURL: "http://localhost:5002/api/tx",
+// });
+
 const API = axios.create({
-    baseURL: "http://localhost:5002/api/tx",
+    baseURL: "https://rps-web3-handler.vercel.app/api/tx",
 });
 
 const signingKey = localStorage.getItem("key");
